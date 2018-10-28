@@ -1,9 +1,22 @@
-const SHA256 = require("crypto-js/sha256");
+import SHA256 = require("crypto-js/sha256");
 
-const { DIFFICULTY, MINE_RATE } = require("../config");
+import { DIFFICULTY, MINE_RATE } from "../config";
 
-class Block {
-	constructor(timestamp, lastHash, hash, data, nonce, difficulty) {
+export default class Block {
+	timestamp: number;
+	lastHash;
+	hash;
+	data;
+	nonce: number;
+	difficulty: number;
+	constructor(
+		timestamp: number,
+		lastHash,
+		hash,
+		data,
+		nonce: number,
+		difficulty: number
+	) {
 		this.timestamp = timestamp;
 		this.lastHash = lastHash;
 		this.hash = hash;
@@ -23,7 +36,7 @@ class Block {
 	}
 
 	static genesis() {
-		return new this("Genesis time", "-------", "f1r57-h45h", [], 0, DIFFICULTY);
+		return new this(null, "-------", "f1r57-h45h", [], 0, DIFFICULTY);
 	}
 
 	static mineBlock(lastBlock, data) {
@@ -61,5 +74,3 @@ class Block {
 		return difficulty;
 	}
 }
-
-module.exports = Block;

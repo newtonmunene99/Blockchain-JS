@@ -1,5 +1,5 @@
-const Blockchain = require("./index");
-const Block = require("./block");
+import Blockchain from "./index";
+import Block from "./block";
 
 describe("Blockchain", () => {
 	let bc, bc2;

@@ -1,12 +1,14 @@
-const Websocket = require("ws");
+import * as Websocket from "ws";
 
-const P2P_PORT = process.env.P2P_PORT || 5001;
+const P2P_PORT = parseInt(process.env.P2P_PORT) || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 
 //HTTP_PORT = 3002 P2P_PORT=5003 PEERS=ws;//localhost:5001,ws://localhost:5002 npm run dev
 //HTTP_PORT = 3002 P2P_PORT = 5002 PEERS = ws://localhost:5001 npm run dev
 
-class P2pServer {
+export default class P2pServer {
+	blockchain;
+	sockets;
 	constructor(blockchain) {
 		this.blockchain = blockchain;
 		this.sockets = [];
@@ -56,5 +58,3 @@ class P2pServer {
 		});
 	}
 }
-
-module.exports = P2pServer;
